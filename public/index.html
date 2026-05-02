@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>E-Voting OSIS 2026</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>E-Voting OSIS 2026</h1>
+<input id="code" placeholder="Kode Unik"><br><br>
+<button onclick="login()">Masuk</button>
+
+<script>
+function login(){
+ fetch("/login",{
+  method:"POST",
+  headers:{"Content-Type":"application/json"},
+  body:JSON.stringify({code:code.value})
+ })
+ .then(res=>res.json())
+ .then(d=>{
+  if(d.success){
+   localStorage.setItem("code",code.value);
+   window.location="vote.html";
+  }else alert(d.message);
+ });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+body{font-family:sans-serif;text-align:center;background:#eef;}
+.card{display:inline-block;background:white;padding:10px;margin:10px;border-radius:10px;cursor:pointer}
+.selected{border:3px solid blue}
+img{width:150px;border-radius:10px}
+button{padding:10px 20px}

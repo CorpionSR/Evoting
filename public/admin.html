@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<h2>Hasil Voting</h2>
+<canvas id="chart"></canvas>
+
+<script>
+let chart;
+function load(){
+ fetch("/results")
+ .then(res=>res.json())
+ .then(data=>{
+  if(chart) chart.destroy();
+  chart=new Chart(document.getElementById("chart"),{
+   type:"bar",
+   data:{labels:["1","2","3"],datasets:[{data:data}]}
+  });
+ });
+}
+setInterval(load,2000);
+</script>
+</body>
+</html>

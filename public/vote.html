@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h2>Pilih Kandidat</h2>
+
+<div class="card" onclick="pilih(0,this)">
+<img src="img/1.jpg">
+<h3>1 & 2</h3>
+</div>
+
+<div class="card" onclick="pilih(1,this)">
+<img src="img/2.jpg">
+<h3>3 & 4</h3>
+</div>
+
+<div class="card" onclick="pilih(2,this)">
+<img src="img/3.jpg">
+<h3>5 & 6</h3>
+</div>
+
+<button onclick="kirim()">PILIH</button>
+
+<script>
+let pilihan=null;
+function pilih(i,e){
+ pilihan=i;
+ document.querySelectorAll(".card").forEach(c=>c.classList.remove("selected"));
+ e.classList.add("selected");
+}
+function kirim(){
+ fetch("/vote",{
+  method:"POST",
+  headers:{"Content-Type":"application/json"},
+  body:JSON.stringify({code:localStorage.getItem("code"),candidate:pilihan})
+ })
+ .then(res=>res.json())
+ .then(d=>{
+  if(d.success){
+   alert("Berhasil");
+   window.location="index.html";
+  }
+ });
+}
+</script>
+</body>
+</html>
